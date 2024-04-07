@@ -1,21 +1,21 @@
-import React from 'react'
-import './register.styles.scss'
+import './login.styles.scss'
 
-const Register: React.FC = () => {
+import React from 'react'
+
+const Login: React.FC = () => {
   return (
-    <div className="register">
+    <div className="login">
       <div className="left"></div>
       <div className="right">
-        <h1>🔥Register</h1>
+        <h1>👋 Welcome Back !</h1>
         <form action="">
           <input type="text" placeholder='Enter your email' />
           <input type="password" placeholder='Enter your password' />
-          <input type="password" placeholder='Confirm your password'/>
-          <button>Register</button>
+          <button>Login</button>
         </form>
       </div>
     </div>
   )
 }
 
-export default Register
+export default Login

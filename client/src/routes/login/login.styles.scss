@@ -1,4 +1,4 @@
-.register {
+.login {
     height: 100vh;
     background-color: #9B8667;
     display: flex;
@@ -48,18 +48,27 @@
         }
     }
 }
-@media screen and (max-width:900px){
-    .register {
+@media screen and (max-width:1400px){
+    .login {
         .right {
             h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
+            }
+        }
+    }
+}
+@media screen and (max-width:900px){
+    .login {
+        .right {
+            h1 {
+                font-size: 2rem;
             }
         }
     }
 }
 
-@media  screen and (max-width: 650px) {
-    .register{
+@media  screen and (max-width: 750px) {
+    .login{
         .right {
             width: 100%;
         }
