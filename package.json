@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type":"module",
+  "type": "module",
   "scripts": {
     "install-all": "npm install --prefix client && npm install --prefix backend",
     "client": "npm run dev --prefix client",
