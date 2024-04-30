@@ -1,10 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import './login.styles.scss'
+import { useContext } from 'react'
+import { AuthContext } from '../../context/auth.context'
 
 const Login: React.FC = () => {
   const [email , setEmail] = useState<string>('')
   const [password , setPassword] = useState<string>('')
+  const {setAuth} = useContext(AuthContext)
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -21,7 +24,7 @@ const Login: React.FC = () => {
       password
     })
     .then((res) => {
-      console.log(res)
+      setAuth(true)
     })
 
     setEmail('')

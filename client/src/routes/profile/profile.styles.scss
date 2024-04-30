@@ -1,0 +1,90 @@
+.profile {
+    // background-color: red;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 0rem 2rem;
+    .left {
+        background-color: #EBC999;
+        height: 80%;
+        flex: 0 0 40%;
+        margin: 0rem 1rem;
+        border-radius: 0.25rem;
+        display: flex;
+        flex-direction: column;
+        img {
+            max-height: 50%;
+            border-radius: 0.25rem;
+        }
+        span {
+            color: black;
+            margin: 0.5rem;
+        }
+        p {
+            color: rgba($color: black, $alpha: 0.6);
+            margin: 0rem 0.5rem;
+        }
+    }
+    .right {
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        .upper {
+            height: 50%;
+            margin-bottom: 1rem;
+            background-color: #EBC999;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            span {
+                font-size: 1.5rem;
+                color: black;
+            }
+            div {
+                display: flex;
+                width: 100%;
+                background-color: #4D3227;
+                justify-content: space-between;
+                padding: 1rem;
+                margin: 0.5rem 0rem;
+                border-radius: 0.25rem;
+
+                button {
+                    cursor: pointer;
+                    padding: 0.25rem;
+                    background-color: #CD7700;
+                    outline: none;
+                    border: none;
+                    color: white;
+                }
+            }
+        }
+        .lower {
+            height: 50%;
+            background-color: #EBC999;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            span {
+                font-size: 1.5rem;
+                color: black;
+            }
+            div {
+                display: flex;
+                width: 100%;
+                background-color: #4D3227;
+                justify-content: space-between;
+                padding: 1rem;
+                margin: 0.5rem 0rem;
+                border-radius: 0.25rem;
+
+                button {
+                    cursor: pointer;
+                    padding: 0.25rem;
+                    background-color: #CD7700;
+                    outline: none;
+                    border: none;
+                    color: white;
+                }
+            }
+        }
+    }
+}
