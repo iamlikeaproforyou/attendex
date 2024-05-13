@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import { isEmail } from 'validator'
 
 const userSchema = new mongoose.Schema({
@@ -12,6 +12,11 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true , 'Please enter a password'],
+    },
+    profileId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Profile',
+        required: true
     }
 })
 

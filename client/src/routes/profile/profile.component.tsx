@@ -1,14 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './profile.styles.scss'
+import axios from 'axios'
+
+interface profile {
+    username: string,
+    email: string,
+    photoURL: string
+}
 
 const Profile: React.FC = () => {
+    const [profile , setProfile] = useState<profile>({
+        username: '',
+        email: '',
+        photoURL: ''
+    })
+    axios.get('/api/profile')
+    .then((res) => setProfile(res.data))
+
     return (
         <div className="profile">
             <div className="left">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0-pJ76yZKPpsLu-I6-y_PJvu-lLNntGz3cDbqVODCqA&s" alt="" />
+                <img src={profile.photoURL}alt="" />
                 <span>Profile</span>
-                <p>hyper kitretsu</p>
-                <p>techindustry245@gmail.com</p>
+                <p>{profile.username}</p>
+                <p>{profile.email}</p>
             </div>
             <div className="right">
                 <div className="upper">

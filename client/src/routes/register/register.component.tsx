@@ -2,10 +2,15 @@ import React, { useState } from 'react'
 import './register.styles.scss'
 import axios from 'axios'
 
+import { useContext } from 'react'
+import { AuthContext } from '../../context/auth.context'
+
 const Register: React.FC = () => {
   const [email , setEmail] = useState<string>('')
   const [password , setPassword] = useState<string>('')
   const [confirmPassword , setConfirmPassword] = useState<string>('')
+
+  const {setAuth} = useContext(AuthContext)
 
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -25,7 +30,9 @@ const Register: React.FC = () => {
         password
       })
       .then((res) => {
-        console.log(res)
+        if(res.status === 200) {
+          setAuth(true)
+        }
       })
     }
     else {

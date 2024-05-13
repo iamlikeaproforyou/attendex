@@ -24,7 +24,10 @@ const Login: React.FC = () => {
       password
     })
     .then((res) => {
-      setAuth(true)
+      console.log(res.status)
+      if(res.status === 200) {
+        setAuth(true)
+      }
     })
 
     setEmail('')

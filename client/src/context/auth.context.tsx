@@ -1,4 +1,5 @@
-import { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface AuthContextType {
     auth: boolean;
@@ -10,8 +11,17 @@ export const AuthContext = createContext<AuthContextType>({
     setAuth: () => {}
 });
 
+
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [auth, setAuth] = useState<boolean>(true);
+    const [auth, setAuth] = useState<boolean>(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(auth) {
+            navigate('/profile')
+        }
+    } , [auth])
 
     const value: AuthContextType = {
         auth,

@@ -1,18 +1,32 @@
 import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+
 import { maxAgeInSeconds } from '../constants'
 import { Types } from 'mongoose'
+import { JWT_SECRET } from '../constants'
 
-dotenv.config()
 
 function createToken (id: Types.ObjectId) {
-
-    // will fix this ...
-    if(!process.env.JWT_SECRET) {
-        throw new Error('JWT secret is not defined')
-    }
-    return jwt.sign({ id } , process.env.JWT_SECRET , { expiresIn: maxAgeInSeconds })
-
+    return jwt.sign({ id } , JWT_SECRET , { expiresIn: maxAgeInSeconds })
 }
 
-export default createToken
+function verifyToken(token: string): Promise<string | null> {
+    return new Promise((resolve , reject) => {
+
+        jwt.verify(token , JWT_SECRET  , (err , decoded) => {
+            if(err || !decoded || typeof decoded === 'string'){
+                resolve(null)
+            }
+            else {
+                resolve(decoded.id)
+            }
+        })
+
+    })
+
+    
+}
+
+export {
+    createToken,
+    verifyToken
+}
