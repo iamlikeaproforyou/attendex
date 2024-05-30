@@ -18,7 +18,7 @@ async function httpSignUpUser(req: customRequest , res: customResponse) {
         })
         const user = await User.create({email , password , profileId: profile._id})
         const token = createToken(user._id)
-        res.cookie('jwt' , token , { httpOnly: true , maxAge: maxAgeInSeconds * 1000 })
+        res.cookie('jwt' , token , { maxAge: maxAgeInSeconds * 1000 })
         res.status(201).json({ user: user._id })
     }
     catch(err) {
@@ -35,7 +35,7 @@ async function httpLoginUser(req: customRequest , res: customResponse) {
         if(user) {
             if(password === user.password) {
                 const token = createToken(user._id)
-                res.cookie('jwt' , token , { httpOnly: true , maxAge: maxAgeInSeconds * 1000 })
+                res.cookie('jwt' , token , { maxAge: maxAgeInSeconds * 1000 })
                 res.status(200).json({ user: user._id })
             }
             else {
