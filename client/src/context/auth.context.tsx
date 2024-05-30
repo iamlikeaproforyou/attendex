@@ -1,3 +1,5 @@
+import axios from "axios";
+import Cookies from 'js-cookie';
 import { ReactNode, createContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -11,8 +13,6 @@ export const AuthContext = createContext<AuthContextType>({
     setAuth: () => {}
 });
 
-
-
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const [auth, setAuth] = useState<boolean>(false);
     const navigate = useNavigate();
@@ -20,6 +20,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     useEffect(() => {
         if(auth) {
             navigate('/profile')
+        }
+        else if (!auth && Cookies.get('jwt')){
+            axios.get('/api/profile')
+            .then(res => {
+                if(res.status === 200) {
+                    setAuth(true)
+                }
+            })
         }
     } , [auth])
 
