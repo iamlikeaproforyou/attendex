@@ -4,6 +4,7 @@ import { customRequest , customResponse} from '../../express'
 import { maxAgeInSeconds , REDIRECT_URL } from '../../constants'
 import User from './user.mongo'
 import Profile from '../profile/profile.mongo'
+import Layout from '../layout/layout.mongo'
 
 import { createToken , verifyToken} from '../../utils/createToken'
 
@@ -11,10 +12,27 @@ async function httpSignUpUser(req: customRequest , res: customResponse) {
     const { email , password } = req.body
 
     try {
+        
         const profile = await Profile.create({
             username: email.substring(0, email.indexOf('@')),
             email: email,
             photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0-pJ76yZKPpsLu-I6-y_PJvu-lLNntGz3cDbqVODCqA&s'
+        })
+        await Layout.create({
+            profileId: profile._id,
+            index: 1,
+            startDate: new Date(),
+            endDate: new Date(),
+            tags: [],
+            active: false,
+            monday: {},
+            tuesday: {},
+            wednesday: {},
+            thursday: {},
+            friday: {},
+            saturday: {},
+            sunday: {}
+
         })
         const user = await User.create({email , password , profileId: profile._id})
         const token = createToken(user._id)
@@ -55,7 +73,7 @@ async function httpLoginUser(req: customRequest , res: customResponse) {
 async function checkAuth(req: customRequest , res: customResponse , next: NextFunction) {
 
     if(req.user) {
-        next()
+        return next()
     }
     const token = req.cookies.jwt
     if(token == null) return res.sendStatus(401)

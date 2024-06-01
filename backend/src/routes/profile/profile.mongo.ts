@@ -11,9 +11,8 @@ const profileSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        require: true
+        required: true
     }
-
 } , {
     timestamps: true
 })

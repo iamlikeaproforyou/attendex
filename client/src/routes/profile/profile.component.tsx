@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './profile.styles.scss'
 import axios from 'axios'
 
@@ -14,8 +14,11 @@ const Profile: React.FC = () => {
         email: '',
         photoURL: ''
     })
-    axios.get('/api/profile')
-    .then((res) => setProfile(res.data))
+    
+    useEffect(() => {
+        axios.get('/api/profile')
+        .then((res) => setProfile(res.data))
+    } , [])
 
     return (
         <div className="profile">

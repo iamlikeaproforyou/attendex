@@ -2,7 +2,6 @@
     height: 100%;
     background-color: #9B8667;
     width: 25%;
-
     .upper {
         height: 40%;
         display: flex;
@@ -24,5 +23,43 @@
                 }
             }
         }
+    }
+
+    .lower {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        ul{
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            li {
+                list-style: none;
+                width: 100%;
+                text-align: center;
+                
+                a {
+                    display: block;
+                    text-decoration: none;
+                    color: black;
+                    background-color: #EBC999;
+                    width: 100%;
+                    padding: 0.65rem;
+                    margin: 0.25rem 0rem;
+                    border-radius: 0.25rem;
+                    cursor: pointer;
+                }
+            }
+            .new-layout-btn {
+                background-color: #CD7700;
+                width: 80%;
+                padding: 0.75rem;
+                margin: 0.25rem 0rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+            }
+        }
+        
     }
 }

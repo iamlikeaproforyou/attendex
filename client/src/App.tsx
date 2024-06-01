@@ -6,6 +6,7 @@ import Profile from './routes/profile/profile.component'
 import Layout from './components/Layout/Layout.component'
 import Privateroutes from './components/Privateroutes/Privateroutes.component'
 import { AuthProvider } from './context/auth.context'
+import Settings from './routes/settings/settings.component'
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
             <Route element={<Layout />}>
               <Route element={<Privateroutes />}>
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/layout/:settingid" element={<Settings />} />
               </Route>
             </Route>
             <Route path="/register" element={<Register />} />
