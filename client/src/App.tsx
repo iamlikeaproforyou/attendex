@@ -5,8 +5,11 @@ import Login from './routes/login/login.component'
 import Profile from './routes/profile/profile.component'
 import Layout from './components/Layout/Layout.component'
 import Privateroutes from './components/Privateroutes/Privateroutes.component'
-import { AuthProvider } from './context/auth.context'
 import Settings from './routes/settings/settings.component'
+import { AuthProvider } from './context/auth.context'
+import { ModalProvider } from './context/modal.context'
+import Dashboard from './routes/dashboard/dashboard.component'
+import Analysis from './routes/analysis/analysis.component'
 
 const App = () => {
 
@@ -14,16 +17,20 @@ const App = () => {
     <div>
       <BrowserRouter>
         <AuthProvider>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route element={<Privateroutes />}>
-                <Route path="/profile" element={<Profile />} />
-                <Route path="/layout/:settingid" element={<Settings />} />
+          <ModalProvider>
+            <Routes>
+              <Route element={<Layout />}>
+                <Route element={<Privateroutes />}>
+                  <Route path="/profile" element={<Profile />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/analysis" element={<Analysis />} />
+                  <Route path="/layout/:settingid" element={<Settings />} />
+                </Route>
               </Route>
-            </Route>
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-          </Routes>
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+            </Routes>
+          </ModalProvider>
         </AuthProvider>
       </BrowserRouter>
     </div>

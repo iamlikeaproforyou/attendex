@@ -7,16 +7,15 @@ import Setting from '../../components/Setting/Setting.component';
 const Settings = () => {
 
     const { settingid } = useParams();
-    const [settings , setSettings] = useState<Layout[]>()
+    const [settings , setSettings] = useState<Layout[]>([])
 
     useEffect(() => {
-        axios.get('/api/profile')
+        axios.get('/api/layout')
             .then(res => {
-                setSettings(res.data.layout)
+                setSettings(res.data)
             })
     }, [])
-
-    const setting = settings?.find((s) => s.id == settingid)
+    const setting = settings.find((s) => (s.index).toString() === settingid)
     return (
         <Setting setting={setting}/>
     )

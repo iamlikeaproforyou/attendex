@@ -11,6 +11,11 @@ const Navigation = () => {
     axios.get('/api/layout')
     .then((res) => setLayouts(res.data))
   } , [])
+
+  const generateLayout = () => {
+    axios.post('/api/layout')
+      .then((res) => setLayouts(res.data))
+  }
   console.log('Layout' , layouts)
   return (
     <div className="navigation">
@@ -30,7 +35,7 @@ const Navigation = () => {
             )
           }
           {/* <li><Link to="/profile">Layout 1</Link></li> */}
-          <li className='new-layout-btn'>+Create new layout</li>
+          <li className='new-layout-btn' onClick={generateLayout}>+Create new layout</li>
         </ul>
       </div>
     </div>
