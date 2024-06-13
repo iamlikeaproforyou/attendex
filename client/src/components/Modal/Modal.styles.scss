@@ -1,0 +1,26 @@
+.modal {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(49 , 49 , 49 , 0.8);
+    top: 0;
+    left: 0;
+    div {
+        .close-btn {
+            text-align: right;
+            width: 100%;
+            height: auto;
+            button {
+                cursor: pointer;
+            }
+        }
+        width: 30%;
+        height: 70%;
+        background-color: #4D3227;
+        color: white;
+
+    }
+}

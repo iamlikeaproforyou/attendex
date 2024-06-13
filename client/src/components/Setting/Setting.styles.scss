@@ -4,10 +4,12 @@
     align-items: center;
     padding: 0rem 2rem;
     color: black;
-    .left{
+
+    .left {
         background-color: #EBC999;
         height: 80%;
         width: 70%;
+
         ul {
             li {
                 list-style: none;
@@ -25,6 +27,7 @@
         flex-direction: column;
         justify-content: space-between;
         border-radius: 0.25rem;
+
         ul {
             li {
                 text-align: center;
@@ -37,29 +40,45 @@
                 border-radius: 0.25rem;
             }
         }
-        div{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 0.25rem 0rem;
 
-            button {
-                padding: 0.5rem;
-                cursor: pointer;
-                background-color: #CD7700;
-                color: #EBC999;
-                outline: none;
-                border: none;
-                border-radius: 0.25rem;
-            }
-            input {
-                height: 100%;
-                outline: none;
-                border: none;
-                padding: 0.5rem;
-                border-radius: 0.25rem;
-                margin: 0rem 0.25rem;
-            }
+        button {
+            padding: 1rem;
+            cursor: pointer;
+            background-color: #CD7700;
+            color: #EBC999;
+            outline: none;
+            border: none;
+            border-radius: 0.25rem;
         }
+    }
+}
+
+.tag-modal {
+    width: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1 {
+        font-size: 3rem;
+    }
+    input {
+        width: 70%;
+        margin: 0.5rem 0rem;
+        padding: 0.75rem;
+        outline: none;
+        border: none;
+        font-size: 1.25rem;
+        border-radius: 0.25rem;
+    }
+
+    button {
+        padding: 0.5rem;
+        cursor: pointer;
+        background-color: #CD7700;
+        color: #EBC999;
+        outline: none;
+        border: none;
+        border-radius: 0.25rem;
+        width: 70%;
     }
 }
