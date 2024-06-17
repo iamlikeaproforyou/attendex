@@ -7,13 +7,54 @@
 
     .left {
         background-color: #EBC999;
+        border: 1px solid #EBC999;
+        border-radius: 0.15rem;
         height: 80%;
         width: 70%;
+        overflow-y: scroll;
+        scrollbar-width: none;
 
-        ul {
-            li {
-                list-style: none;
-                text-decoration: none;
+        .setting-btn {
+            text-align: right;
+            padding: 0rem 1rem;
+            button {
+                cursor: pointer;
+            }
+        }
+        .setting-content {
+            padding: 0rem 1rem;
+            .setting-title {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                h1 {
+                    font-weight: 400;
+                }
+                p {
+                    font-size: 2rem;
+                    cursor: pointer;
+                }
+            }
+
+            hr {
+                height: 0.20rem;
+                background-color: black;
+                margin: 0.5rem 0rem;
+            }
+            .setting-list {
+                background-color: #4D3227;
+                color: #EBC999;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem;
+                border-radius: 0.25rem;
+                margin: 0.25rem 0rem;
+                .tag {
+                    background-color: #CD7700;
+                    padding: 0.25rem;
+                    border-radius: 0.25rem;
+                }
             }
         }
     }
@@ -53,7 +94,7 @@
     }
 }
 
-.tag-modal {
+.modal-container {
     width: 100% !important;
     display: flex;
     flex-direction: column;
@@ -61,7 +102,7 @@
     h1 {
         font-size: 3rem;
     }
-    input {
+    .tag-modal-input {
         width: 70%;
         margin: 0.5rem 0rem;
         padding: 0.75rem;
@@ -70,7 +111,15 @@
         font-size: 1.25rem;
         border-radius: 0.25rem;
     }
-
+    .date-modal-input {
+        padding: 0.50rem;
+        width: 70%;
+    }
+    span{
+        font-size: 1.5rem;
+        margin: 0.2rem 0rem;
+        text-align: left !important;
+    }
     button {
         padding: 0.5rem;
         cursor: pointer;
@@ -80,5 +129,16 @@
         border: none;
         border-radius: 0.25rem;
         width: 70%;
+        margin: 0.2rem 0rem;
+    }
+    .select-options {
+        width: 70%;
+        padding: 0.5rem;
+        cursor: pointer;
+        outline: none;
+        border: none;
+        border-radius: 0.25rem;
+        font-size: 1.2rem;
+        margin: 0.25rem 0rem;
     }
 }
