@@ -1,4 +1,4 @@
-interface DayWiseTags {
+export interface DayWiseTags {
     subject: string,
     tag: string
 }
@@ -16,4 +16,5 @@ export interface Layout {
     friday: [DayWiseTags]
     saturday: [DayWiseTags]
     sunday: [DayWiseTags]
+    [key: string]: any;
 }

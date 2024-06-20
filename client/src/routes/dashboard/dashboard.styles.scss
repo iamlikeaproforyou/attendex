@@ -1,0 +1,89 @@
+.dashboard {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+        width: 90%;
+        height: 90%;
+        background-color: #ebc999;
+        border-radius: 0.25rem;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .first   {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+            width: 90%;
+            padding: 0.25rem;
+            .dashboard-left {
+                display: flex;
+                p{
+                    font-size: 1.5rem;
+                    margin: 0rem 0.5rem;
+                    cursor: pointer;
+                }
+            }
+            .dashboard-right {
+                display: flex;
+                p {
+                    font-size: 1.2rem;
+                    margin: 0rem 0.5rem;
+                }
+                text-align: right;
+            }
+        }
+        .second {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            width: 90%;
+            .todo-day {
+                display: flex;
+                width: 100%;
+                color: white;
+                background-color: #4D3227;
+                justify-content: space-between;
+                align-items: center;
+                border-radius: 0.25rem;
+                margin: 0.2rem 0rem;
+                padding: 0.5rem;
+                p{
+                    margin: 0rem 1rem;
+                    flex-shrink: 0;
+                }
+                .checkmark {
+                    cursor: pointer;
+                }
+                .tag {
+                    background-color: #CD7700;
+                    padding: 0.2rem;
+                    border-radius: 0.25rem;
+                }
+                .content {
+                    flex-grow: 1;
+                }
+            }
+        }
+        .third {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            button {
+                padding: 0.5rem 1rem;
+                margin: 0.5rem;
+                cursor: pointer;
+                background-color: #CD7700;
+                color: #EBC999;
+                outline: none;
+                border: none;
+                border-radius: 0.25rem;
+            }
+        }
+    }
+}
