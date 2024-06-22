@@ -3,7 +3,7 @@ export interface DayWiseTags {
     tag: string
 }
 
-export interface Layout {
+export interface Setting {
     id: string,
     startDate: Date,
     endDate: Date,

@@ -38,17 +38,29 @@
                 list-style: none;
                 width: 100%;
                 text-align: center;
-                
+                display: flex;
+                background-color: #EBC999;
+                border-radius: 0.25rem;
+                margin: 0.25rem 0rem;
+                padding: 0.65rem;
                 a {
                     display: block;
                     text-decoration: none;
                     color: black;
-                    background-color: #EBC999;
-                    width: 100%;
-                    padding: 0.65rem;
-                    margin: 0.25rem 0rem;
-                    border-radius: 0.25rem;
+                    flex-grow: 1;
                     cursor: pointer;
+                }
+                button {
+                    outline: none;
+                    border: none;
+                    padding: 0.25rem;
+                    background-color: #CD7700;
+                    color: white;
+                    cursor: pointer;
+                    border-radius: 0.25rem;
+                }
+                .active {
+                    background-color: rgb(97, 161, 1) !important;
                 }
             }
             .new-layout-btn {

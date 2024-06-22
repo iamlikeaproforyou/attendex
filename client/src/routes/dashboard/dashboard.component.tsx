@@ -1,18 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import './dashboard.styles.scss'
-import axios from 'axios'
 import { addDays, format, parseISO } from 'date-fns'
-import { Layout, DayWiseTags } from '../../components/Layout/Layout'
+import { Setting, DayWiseTags } from '../../components/Layout/Layout'
+import { SettingsContext } from '../../context/layout.context'
 
 const Dashboard = () => {
   const [inputDate, setInputDate] = useState<string>(format(new Date(), "yyyy-MM-dd"))
   const [weekDay, setWeekDay] = useState<string>(format(new Date(), "EEEE"))
-  const [weekData , setWeekData] = useState<Layout>()
+  const { settings } = useContext(SettingsContext)
+  const [weekData , setWeekData] = useState<Setting | undefined>()
+
   useEffect(() => {
-    axios.get('/api/dashboard')
-      .then((res) => setWeekData(res.data))
-  }, [])
-  console.log('weekdata is' , weekData?.[weekDay.toLowerCase()])
+    setWeekData(settings.find((lay) => lay.active === true))
+  }, [settings])
+
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputDate(e.target.value)
     setWeekDay(format(e.target.value, "EEEE"))

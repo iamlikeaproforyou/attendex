@@ -16,18 +16,24 @@ interface NewEntryData {
     tag: string
 }
 import React, { useContext, useState } from "react"
-import { Layout } from "../Layout/Layout"
+import { Setting as Layout } from "../Layout/Layout"
 import axios from "axios"
 
 import { ModalContext } from "../../context/modal.context"
 
 import './Setting.styles.scss'
 import Modal from "../Modal/Modal.component"
-
+import { SettingsContext } from "../../context/layout.context";
 
 const Setting: React.FC<SettingProps> = ({ setting }) => {
-    console.log(setting)
+
     const { modal, setModal } = useContext(ModalContext);
+    const {setSettings} = useContext(SettingsContext)
+
+    const getLayouts = async () => {
+        await axios.get('/api/layout')
+          .then((res) => setSettings(res.data))
+    }
 
     const [newtag, setNewTag] = useState<string>('')
     const [modalType, setModalType] = useState<ModalType>({
@@ -75,6 +81,7 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
         const newObj = { ...setting, startDate: date.startDate, endDate: date.endDate }
 
         await axios.post('/api/layout', newObj)
+        getLayouts()
         setModal(!modal)
         setModalType({
             dateSetting: false,
@@ -113,6 +120,7 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
         else if(pTagId == '7')
             {setting?.sunday.push(newEntryData)}
         await axios.post('/api/layout' , {...setting })
+        getLayouts()
         setModal(!modal)
     }
     const uploadTag = async () => {
@@ -121,6 +129,7 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
         await axios.post('/api/layout', {
             ...setting, tags: newArray
         })
+        getLayouts()
         setNewTag('')
         setModal(!modal)
         setModalType({
@@ -174,7 +183,7 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
                         <input type="text" className="tag-modal-input" onChange={handleSubjectChange} />
                         <select className="select-options" onChange={handleTagChange}>
                             <option value="">Select a tag</option>
-                            {setting?.tags.map((tag) => <option value={tag}>{tag}</option>)}
+                            {setting?.tags.map((tag,index) => <option value={tag} key={`${index}`}>{tag}</option>)}
                         </select>
                         <button onClick={handleNewEntrySubmit}>+ Create Entry</button>
                     </div>
@@ -326,7 +335,7 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
                 </div>
                 <div className="right">
                     <ul>
-                        {setting?.tags.map((tagname) => (<li>{tagname}</li>))}
+                        {setting?.tags.map((tagname , index) => (<li key={`${index}`}>{tagname}</li>))}
                     </ul>
                     <button onClick={openNewTagModal}>+ Create Tag</button>
                 </div>

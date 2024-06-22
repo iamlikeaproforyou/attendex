@@ -1,22 +1,38 @@
 import { Link } from 'react-router-dom'
 import './Navigation.styles.scss'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Layout } from '../Layout/Layout'
+import { useContext, useEffect } from 'react'
+import { SettingsContext } from '../../context/layout.context'
 
 const Navigation = () => {
-  const [layouts , setLayouts] = useState<Layout[]>([])
+  const { settings, setSettings } = useContext(SettingsContext)
+  const getLayouts = async () => {
 
+    await axios.get('/api/layout')
+      .then((res) => setSettings(res.data))
+  }
   useEffect(() => {
-    axios.get('/api/layout')
-    .then((res) => setLayouts(res.data))
-  } , [])
+    getLayouts()
+  }, [])
 
   const generateLayout = () => {
     axios.post('/api/layout')
-      .then((res) => setLayouts(res.data))
+      .then((res) => setSettings(res.data))
   }
-  console.log('Layout' , layouts)
+  const handleLayoutActivation = async (index: Number) => {
+
+    const activeLayout = settings.find((lay) => lay.active === true)
+    const layoutToActivate = settings.find((lay) => lay.index === index)
+    if (activeLayout) {
+      activeLayout.active = false
+      await axios.post('/api/layout', activeLayout)
+    }
+    if (layoutToActivate) {
+      layoutToActivate.active = true
+      await axios.post('/api/layout', layoutToActivate)
+    }
+    getLayouts()
+  }
   return (
     <div className="navigation">
       <div className="upper">
@@ -30,11 +46,17 @@ const Navigation = () => {
       <div className="lower">
         <ul>
           {
-            layouts.map(
-              layout => (<li key={`${layout.index}`}><Link to={`/layout/${layout.index}`}>{`Layout ${layout.index}`}</Link></li>)
-            )
+            settings.map(layout => (
+              <li key={`${layout.index}`}>
+                <Link to={`/layout/${layout.index}`}>{`Layout ${layout.index}`}</Link>
+                <button onClick={() => handleLayoutActivation(layout.index)} className={layout.active ? 'active' : ''}>{layout.active ? 'active' : 'activate'}</button>
+              </li>
+            ))
           }
-          {/* <li><Link to="/profile">Layout 1</Link></li> */}
+          {/* <li>
+            <Link to="/profile">Layout 1</Link>
+            <button className='active'>active</button>
+          </li> */}
           <li className='new-layout-btn' onClick={generateLayout}>+Create new layout</li>
         </ul>
       </div>
