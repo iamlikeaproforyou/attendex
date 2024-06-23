@@ -8,6 +8,34 @@ const dayWiseSchema = new mongoose.Schema({
         type: String,
     }
 })
+const trackSchema = new mongoose.Schema({
+    date: {
+        type: Date,
+        required: true
+    },
+    tag: {
+        type: String,
+        required: true
+    },
+    subject: {
+        type: String,
+        require: true
+    },
+    done: {
+        type: Boolean,
+        required: true
+    }
+})
+const daysNotToIncludeSchema = new mongoose.Schema({
+    date: {
+        type: Date,
+        required: true
+    },
+    include:{
+        type: Boolean,
+        required: true
+    }
+})
 
 const layoutSchema = new mongoose.Schema({
     profileId: {
@@ -42,6 +70,8 @@ const layoutSchema = new mongoose.Schema({
     friday: [dayWiseSchema],
     saturday: [dayWiseSchema],
     sunday: [dayWiseSchema],
+    track: [trackSchema],
+    daysNotToInclude: [daysNotToIncludeSchema]
 })
 
 const Layout = mongoose.model("Layout" , layoutSchema)

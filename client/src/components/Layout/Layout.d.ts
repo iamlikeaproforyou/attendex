@@ -2,6 +2,16 @@ export interface DayWiseTags {
     subject: string,
     tag: string
 }
+export interface trackData {
+    date: Date,
+    tag: 'string',
+    subject: string,
+    done: boolean
+}
+export interface daysNotToIncludeSchema {
+    date: Date,
+    include: boolean
+}
 
 export interface Setting {
     id: string,
@@ -16,5 +26,7 @@ export interface Setting {
     friday: [DayWiseTags]
     saturday: [DayWiseTags]
     sunday: [DayWiseTags]
+    track: [trackData],
+    daysNotToInclude: [daysNotToIncludeSchema]
     [key: string]: any;
 }

@@ -1,8 +1,9 @@
 import express from 'express'
-import { httpGetDashboard } from './dashboard.controller';
+import { httpUpdateLayoutFromDashboard , httpUpdateDaysNotToInclude } from './dashboard.controller';
 
 const dashboardRouter = express.Router();
 
-dashboardRouter.get('/dashboard' , httpGetDashboard)
+dashboardRouter.post('/dashboard' , httpUpdateLayoutFromDashboard)
+dashboardRouter.post('/dashboard/day', httpUpdateDaysNotToInclude)
 
 export default dashboardRouter

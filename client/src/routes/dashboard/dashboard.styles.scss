@@ -45,28 +45,34 @@
             .todo-day {
                 display: flex;
                 width: 100%;
-                color: white;
-                background-color: #4D3227;
-                justify-content: space-between;
-                align-items: center;
-                border-radius: 0.25rem;
-                margin: 0.2rem 0rem;
-                padding: 0.5rem;
-                p{
-                    margin: 0rem 1rem;
-                    flex-shrink: 0;
-                }
-                .checkmark {
-                    cursor: pointer;
-                }
-                .tag {
-                    background-color: #CD7700;
-                    padding: 0.2rem;
+                div {
+                    display: flex;
+                    width: 100%;
+                    color: white;
+                    background-color: #4D3227;
+                    justify-content: space-between;
+                    align-items: center;
                     border-radius: 0.25rem;
+                    margin: 0.2rem 0rem;
+                    padding: 0.5rem;
+                    p , s{
+                        margin: 0rem 1rem;
+                        flex-shrink: 0;
+                    }
+                    .checkmark {
+                        cursor: pointer;
+                    }
+                    .tag {
+                        background-color: #CD7700;
+                        padding: 0.2rem;
+                        border-radius: 0.25rem;
+                    }
+                    .content {
+                        flex-grow: 1;
+                    }
+
                 }
-                .content {
-                    flex-grow: 1;
-                }
+                
             }
         }
         .third {
@@ -83,6 +89,9 @@
                 outline: none;
                 border: none;
                 border-radius: 0.25rem;
+            }
+            .include {
+                background-color: rgb(100, 0, 0) !important;
             }
         }
     }
