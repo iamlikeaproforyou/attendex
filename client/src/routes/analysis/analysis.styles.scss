@@ -1,0 +1,93 @@
+.lower-text {
+    background-color: #CD7700;
+    color: white;
+    width: 100%;
+    border-radius: 0.25rem;
+    padding: 0.25rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.analysis {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+        width: 90%;
+        height: 90%;
+        display: flex;
+        .left {
+            background-color: #EBC999;
+            border-radius: 0.25rem;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            .tagwise-analysis {
+                width: 100%;
+                flex-grow: 1;
+                padding: 0.25rem;
+                div {
+                    display: flex;
+                    margin: 0.25rem 0rem;
+                    justify-content: space-between;
+                    padding: 1rem;
+                    border-radius: 0.25rem;
+                    background-color: #4D3227;
+                    width: 100%;
+                }
+            }
+        }
+        .right {
+            height: 100%;
+            margin: 0rem 0.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .upper{
+                height: 50%;
+                width: 100%;
+                background-color: #EBC999;
+                margin-bottom: 0.25rem;
+                border-radius: 0.25rem;
+                color: black;
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+                .percentage {
+                    flex-grow: 1;
+                    font-size: 7rem;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+            .lower{
+                height: 50%;
+                background-color: #EBC999;
+                border-radius: 0.25rem;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                .excluded-dates{
+                    flex-grow: 1;
+                    padding: 0.25rem;
+                    width: 100%;
+                    div {
+                        display: flex;
+                        justify-content: space-between;
+                        padding: 1rem;
+                        border-radius: 0.25rem;
+                        background-color: #4D3227;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
