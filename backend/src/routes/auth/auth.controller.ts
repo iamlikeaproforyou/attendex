@@ -16,7 +16,7 @@ async function httpSignUpUser(req: customRequest , res: customResponse) {
         const profile = await Profile.create({
             username: email.substring(0, email.indexOf('@')),
             email: email,
-            photoURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS0-pJ76yZKPpsLu-I6-y_PJvu-lLNntGz3cDbqVODCqA&s'
+            photoURL: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
         })
         await Layout.create({
             profileId: profile._id,

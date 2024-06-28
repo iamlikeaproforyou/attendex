@@ -137,7 +137,7 @@ const Dashboard = () => {
                   <p>&middot;</p>
                   <s className='content'>{obj.subject}</s>
                   <p className="tag">{obj.tag}</p>
-                  <button className='cancellation-btn' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
+                  <button className='cancellation-btn include' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
                 </div>
               ): (
               findObjExistOrNotInTask(obj.subject, obj.tag) ?
@@ -154,7 +154,7 @@ const Dashboard = () => {
                     <p className='content'>{obj.subject}</p>
                     <p className="tag">{obj.tag}</p>
                     {checkCancelledOrNot(obj.tag , obj.subject)?(
-                      <button className='cancellation-btn' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
+                      <button className='cancellation-btn include' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
                     ):(
                       <button className='cancellation-btn' onClick={() => handleCancellation(obj.tag , obj.subject)}>cancel</button>
                     )}

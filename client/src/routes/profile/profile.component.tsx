@@ -24,7 +24,7 @@ const Profile: React.FC = () => {
         <div className="profile">
             <div className="left">
                 <div className="photo">
-                    <img src={profile.photoURL}alt="" />
+                    <img src={profile.photoURL} alt="" />
                 </div>
 
                 <span>Profile</span>

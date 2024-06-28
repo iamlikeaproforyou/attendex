@@ -20,17 +20,28 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                 subjectCount.set(e,0)
                 subjectAttendedMap.set(e , 0)
             })
-            while(datei != endDate){
-                let temp = format(new Date(datei) , "EEEE")
+            if(startDate === endDate) {
+                let temp = format(new Date(startDate) , "EEEE")
                 const dayData = (exist as any)[temp.toLowerCase()]
                 dayData.forEach((e: any) => {
                     if(e.tag){
                         subjectCount.set(e.tag , subjectCount.get(e.tag)+1)
                     }
                 });
-                datei = format(addDays(parseISO(datei), 1), "yyyy-MM-dd")
             }
-            console.log('after total count' , subjectCount)
+            else {
+                while(datei != endDate){
+                    let temp = format(new Date(datei) , "EEEE")
+                    const dayData = (exist as any)[temp.toLowerCase()]
+                    dayData.forEach((e: any) => {
+                        if(e.tag){
+                            subjectCount.set(e.tag , subjectCount.get(e.tag)+1)
+                        }
+                    });
+                    datei = format(addDays(parseISO(datei), 1), "yyyy-MM-dd")
+                }
+            }
+            
             // substract tags of not to include days
  
             exist.daysNotToInclude.forEach((e) => {
@@ -69,7 +80,7 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                 totalAttendedCnt += count
             }
             // total attendance
-            const totalPercentage = ((totalAttendedCnt/totalTagsCnt)*100).toFixed(2)
+            const totalPercentage = totalTagsCnt? ((totalAttendedCnt/totalTagsCnt)*100).toFixed(2) : 0
 
             const percentageMap = new Map();
 
@@ -79,7 +90,6 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                 percentageMap.set(subject, percentage.toFixed(2))
             });
             // totalPercentage , percentageMap , datesNotToInclude
-            console.log(subjectCount , percentageMap)
             let subjectPercentage : {subject: string , percentage: number}[] = []
             let datesNotToIncludeArray:{day: string , date: string}[] = []
             for(const value of datesNotToInclude) {
