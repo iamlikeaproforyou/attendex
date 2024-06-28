@@ -24,6 +24,10 @@ const trackSchema = new mongoose.Schema({
     done: {
         type: Boolean,
         required: true
+    },
+    cancelled: {
+        type: Boolean,
+        required: true
     }
 })
 const daysNotToIncludeSchema = new mongoose.Schema({

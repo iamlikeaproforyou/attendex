@@ -24,7 +24,7 @@ async function httpSignUpUser(req: customRequest , res: customResponse) {
             startDate: new Date(),
             endDate: new Date(),
             tags: [],
-            active: false,
+            active: true,
             monday: {},
             tuesday: {},
             wednesday: {},

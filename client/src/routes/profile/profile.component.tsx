@@ -23,7 +23,10 @@ const Profile: React.FC = () => {
     return (
         <div className="profile">
             <div className="left">
-                <img src={profile.photoURL}alt="" />
+                <div className="photo">
+                    <img src={profile.photoURL}alt="" />
+                </div>
+
                 <span>Profile</span>
                 <p>{profile.username}</p>
                 <p>{profile.email}</p>

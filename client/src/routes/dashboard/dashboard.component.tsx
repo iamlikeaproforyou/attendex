@@ -57,7 +57,8 @@ const Dashboard = () => {
       date: inputDate,
       tag: trackTag,
       subject: subject,
-      done: true
+      done: true,
+      cancelled: false
     })
     getLayouts()
   }
@@ -75,9 +76,42 @@ const Dashboard = () => {
       date: inputDate,
       tag: trackTag,
       subject: subject,
-      done: false
+      done: false,
+      cancelled: false
     })
     getLayouts()
+  }
+  const handleCancellation = async (trackTag: string , subject: string) => {
+    await axios.post('/api/dashboard' , {
+      index: weekData?.index,
+      date: inputDate,
+      tag: trackTag,
+      subject: subject,
+      done: false,
+      cancelled: true
+    })
+    getLayouts()
+  }
+  const handleInclude = async (trackTag: string , subject: string) => {
+    await axios.post('/api/dashboard' , {
+      index: weekData?.index,
+      date: inputDate,
+      tag: trackTag,
+      subject: subject,
+      done: false,
+      cancelled: false
+    })
+    getLayouts()
+  }
+  const checkCancelledOrNot = (trackTag: string , subject: string) =>{ // return true of cancelled
+    const exist = weekData?.track.find((e) => {
+      return ((new Date(e.date).getTime() === new Date(inputDate).getTime()) &&( e.tag == trackTag) 
+        && e.subject == subject && e.cancelled === true)
+    })
+    if(exist) {
+      return true;
+    }
+    return false;
   }
   return (
     <div className="dashboard">
@@ -98,21 +132,36 @@ const Dashboard = () => {
           {weekData?.[weekDay.toLowerCase()].map((obj: DayWiseTags, index: Number) =>
           (obj.subject && obj.tag &&
             <div className="todo-day" key={`${index}`}>
-              {findObjExistOrNotInTask(obj.subject, obj.tag) ?
+              {checkCancelledOrNot(obj.tag , obj.subject)? (
+                <div>
+                  <p>&middot;</p>
+                  <s className='content'>{obj.subject}</s>
+                  <p className="tag">{obj.tag}</p>
+                  <button className='cancellation-btn' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
+                </div>
+              ): (
+              findObjExistOrNotInTask(obj.subject, obj.tag) ?
                 (
                   <div>
                     <p className="checkmark" onClick={() => handleRemoveFromTrack(obj.tag, obj.subject)}>-</p>
                     <s className='content'>{obj.subject}</s>
                     <p className="tag">{obj.tag}</p>
+                    <button className='cancellation-btn vis-hidden'>cancel</button>
                   </div>
                 ) : (
                   <div>
                     <p className="checkmark" onClick={() => handleCheckMark(obj.tag, obj.subject)}>&#10003;</p>
                     <p className='content'>{obj.subject}</p>
                     <p className="tag">{obj.tag}</p>
+                    {checkCancelledOrNot(obj.tag , obj.subject)?(
+                      <button className='cancellation-btn' onClick={() => handleInclude(obj.tag , obj.subject)}>include</button>
+                    ):(
+                      <button className='cancellation-btn' onClick={() => handleCancellation(obj.tag , obj.subject)}>cancel</button>
+                    )}
+                    
                   </div>
                 )
-              }
+              )}
             </div>
           ))}
           {/* <div className="todo-day">

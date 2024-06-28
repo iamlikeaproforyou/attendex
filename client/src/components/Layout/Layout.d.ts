@@ -6,7 +6,8 @@ export interface trackData {
     date: Date,
     tag: 'string',
     subject: string,
-    done: boolean
+    done: boolean,
+    cancelled: boolean
 }
 export interface daysNotToIncludeSchema {
     date: Date,

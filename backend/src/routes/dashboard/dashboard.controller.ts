@@ -8,11 +8,12 @@ const httpUpdateLayoutFromDashboard = async (req: customRequest , res: customRes
             const exist = layoutData.track.find((ele) => (new Date(ele.date).getTime() === new Date(req.body.date).getTime() && ele.tag === req.body.tag && ele.subject === req.body.subject))
             if(exist) {
                 exist.done = req.body.done
+                exist.cancelled = req.body.cancelled
                 await layoutData.save()
                 return res.sendStatus(200)
             }
             else {
-                layoutData.track.push({ date: req.body.date , tag: req.body.tag , subject: req.body.subject , done: req.body.done})
+                layoutData.track.push({ date: req.body.date , tag: req.body.tag , subject: req.body.subject , done: req.body.done , cancelled: req.body.cancelled})
                 await layoutData.save();
                 return res.sendStatus(200)
             }

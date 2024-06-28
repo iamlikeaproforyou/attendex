@@ -30,7 +30,7 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                 });
                 datei = format(addDays(parseISO(datei), 1), "yyyy-MM-dd")
             }
-            
+            console.log('after total count' , subjectCount)
             // substract tags of not to include days
  
             exist.daysNotToInclude.forEach((e) => {
@@ -47,10 +47,16 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                     });
                 }
             })
+            // exclude cancelled days
+            exist.track.forEach((e) => {
+                if(e.cancelled){
+                    subjectCount.set(e.tag , subjectCount.get(e.tag)-1)
+                }
+            })
             // count how many attended
             exist.track.forEach((e) => {
                 const isDateWithinInterval = isWithinInterval(new Date(e.date) , {start: new Date(startDate) , end: new Date(endDate)})
-                if(isDateWithinInterval && e.done && !datesNotToInclude.has(new Date(e.date).getTime())) {
+                if(isDateWithinInterval && e.done && !datesNotToInclude.has(new Date(e.date).getTime()) && !e.cancelled) {
                     subjectAttendedMap.set(e.tag , subjectAttendedMap.get(e.tag)+1)
                 }
             })
@@ -73,6 +79,7 @@ const httpGetAnalysis = async (req: customRequest , res: customResponse) => {
                 percentageMap.set(subject, percentage.toFixed(2))
             });
             // totalPercentage , percentageMap , datesNotToInclude
+            console.log(subjectCount , percentageMap)
             let subjectPercentage : {subject: string , percentage: number}[] = []
             let datesNotToIncludeArray:{day: string , date: string}[] = []
             for(const value of datesNotToInclude) {
