@@ -37,7 +37,7 @@ async function httpSignUpUser(req: customRequest , res: customResponse) {
         const user = await User.create({email , password , profileId: profile._id})
         const token = createToken(user._id)
         res.cookie('jwt' , token , { maxAge: maxAgeInSeconds * 1000 })
-        res.status(201).json({ user: user._id })
+        return res.status(201).json({ user: user._id })
     }
     catch(err) {
         console.log(err)

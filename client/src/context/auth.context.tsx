@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         if(auth) {
-            navigate('/profile')
+            navigate('/dashboard')
         }
         else if (!auth && Cookies.get('jwt')){
             axios.get('/api/profile')
@@ -28,6 +28,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
                     setAuth(true)
                 }
             })
+        }
+        else {
+            navigate('/login')
         }
     } , [auth])
 

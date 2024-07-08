@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import './Header.styles.scss'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
@@ -11,6 +11,8 @@ interface profile {
 
 const Header = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+
     const imageClick = () => {
         navigate('/profile')
     } 
@@ -27,7 +29,7 @@ const Header = () => {
     } , [])
     return (
         <div className="header">
-            <p>My profile</p>
+            <p>{location.pathname.replace("/","").charAt(0).toUpperCase() + location.pathname.slice(2)}</p>
             <img onClick={() => imageClick()} src={profile.photoURL} alt="" />
         </div>
     )

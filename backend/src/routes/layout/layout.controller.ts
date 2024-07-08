@@ -23,6 +23,9 @@ const httpCreateNewLayout = async (req: customRequest , res: customResponse , ne
             const highestId = docs.reduce((max, obj) => {
                 return obj.index > max ? obj.index : max;
             }, 1);
+            if(highestId >= 6) {
+                return res.status(400).send({ err: 'cannot create more layout' })
+            }
             const layout = await Layout.create({
                 profileId: profileId,
                 index: highestId+1,

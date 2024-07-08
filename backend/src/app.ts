@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import authRouter from './routes/auth/auth.router'
 import cookieParser from 'cookie-parser'
 import profileRouter from './routes/profile/profile.router'
@@ -17,4 +18,11 @@ app.use('/api' , checkAuth , profileRouter)
 app.use('/api', checkAuth , layoutRouter)
 app.use('/api', checkAuth , dashboardRouter)
 app.use('/api' , checkAuth , analysisRouter)
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static(path.join(__dirname , '..' , 'public')));
+    app.use('/*' , (req , res) => {
+        return res.sendFile(path.join(__dirname , '..' , 'public' , 'index.html'));
+    })
+}
 export default app

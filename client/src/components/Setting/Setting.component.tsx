@@ -58,7 +58,6 @@ const Setting: React.FC<SettingProps> = ({ setting }) => {
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.name == 'startDate') {
             const endDate = date.endDate
-            console.log(e.target.value)
             setDate({
                 startDate: e.target.value,
                 endDate

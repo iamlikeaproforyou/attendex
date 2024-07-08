@@ -11,6 +11,7 @@ import { ModalProvider } from './context/modal.context'
 import { SettingsProvider } from './context/layout.context'
 import Dashboard from './routes/dashboard/dashboard.component'
 import Analysis from './routes/analysis/analysis.component'
+import Support from './routes/support/support.component'
 
 const App = () => {
 
@@ -27,6 +28,7 @@ const App = () => {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/analysis" element={<Analysis />} />
                     <Route path="/layout/:settingid" element={<Settings />} />
+                    <Route path="/support" element={<Support />} />
                   </Route>
                 </Route>
                 <Route path="/register" element={<Register />} />

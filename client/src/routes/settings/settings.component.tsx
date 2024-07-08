@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { Layout } from '../../components/Layout/Layout';
+import { Setting as setting } from '../../components/Layout/Layout';
 import Setting from '../../components/Setting/Setting.component';
 
 const Settings = () => {
 
     const { settingid } = useParams();
-    const [settings , setSettings] = useState<Layout[]>([])
+    const [settings , setSettings] = useState<setting[]>([])
 
     useEffect(() => {
         axios.get('/api/layout')

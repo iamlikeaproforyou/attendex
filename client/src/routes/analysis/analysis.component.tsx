@@ -27,7 +27,6 @@ const Analysis = () => {
     setWeekData(settings.find((lay) => lay.active === true))
     getData()
   }, [settings])
-  console.log(data.subjectWisePercentage)
   return (
     <div className="analysis">
       <div className="container">
