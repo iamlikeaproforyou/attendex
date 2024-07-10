@@ -9,6 +9,8 @@ import Settings from './routes/settings/settings.component'
 import { AuthProvider } from './context/auth.context'
 import { ModalProvider } from './context/modal.context'
 import { SettingsProvider } from './context/layout.context'
+import { RecoilRoot } from 'recoil'
+
 import Dashboard from './routes/dashboard/dashboard.component'
 import Analysis from './routes/analysis/analysis.component'
 import Support from './routes/support/support.component'
@@ -18,6 +20,7 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
+      <RecoilRoot>
         <AuthProvider>
           <ModalProvider>
             <SettingsProvider>
@@ -37,6 +40,7 @@ const App = () => {
             </SettingsProvider>
           </ModalProvider>
         </AuthProvider>
+        </RecoilRoot>
       </BrowserRouter>
     </div>
   )

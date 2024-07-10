@@ -31,7 +31,19 @@ const httpUpdateProfile = async (req: customRequest , res: customResponse) => {
     }
 }
 
+const httpUpdateImage = async(req: customRequest , res: customResponse) => {
+    if(req.user && req.file) {
+        const profile = await Profile.findOne({ _id: req.user.profileId })
+        if(profile) {
+            profile.photoURL = req.file.filename
+            profile.save()
+            return res.sendStatus(200)
+        }
+    }
+}
+
 export {
     httpGetProfile,
-    httpUpdateProfile
+    httpUpdateProfile,
+    httpUpdateImage
 }

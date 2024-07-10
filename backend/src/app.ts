@@ -19,6 +19,7 @@ app.use('/api', checkAuth , layoutRouter)
 app.use('/api', checkAuth , dashboardRouter)
 app.use('/api' , checkAuth , analysisRouter)
 
+app.use('/api/images', express.static(path.join(__dirname, '..' , 'uploads')))
 if(process.env.NODE_ENV === 'production'){
     app.use(express.static(path.join(__dirname , '..' , 'public')));
     app.use('/*' , (req , res) => {

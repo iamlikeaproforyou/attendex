@@ -3,12 +3,8 @@ import './profile.styles.scss'
 import axios from 'axios'
 import Modal from '../../components/Modal/Modal.component'
 import { ModalContext } from '../../context/modal.context'
-
-interface profile {
-    username: string,
-    email: string,
-    photoURL: string
-}
+import { useRecoilState } from 'recoil'
+import { profileState } from '../../atoms'
 
 interface ModifiedProfile{
     email: string,
@@ -17,20 +13,20 @@ interface ModifiedProfile{
 }
 const Profile: React.FC = () => {
     const {modal , setModal} = useContext(ModalContext) 
-    const [profile , setProfile] = useState<profile>({
-        username: '',
-        email: '',
-        photoURL: ''
-    })
-    
+    const [profile , setProfile] = useRecoilState(profileState);
+
+    const [file , setFile] = useState<File | null>(null)
     const getProfile = async () => {
         await axios.get('/api/profile')
-        .then((res) => setProfile(res.data))
+        .then((res) => setProfile({
+            username: res.data.username,
+            email: res.data.email,
+            photoURL: res.data.photoURL
+        }))
     }
     useEffect(() => {
         getProfile()
     } , [])
-
     const [modalType , setModalType] = useState<string>('')
     const [modifiedProfile , setModifiedProfile] = useState<ModifiedProfile>({
         email: '',
@@ -51,6 +47,10 @@ const Profile: React.FC = () => {
         const buttonType = e.currentTarget.name
         setModalType(buttonType)
     }
+    const handleUploadImageModal = () => {
+        setModal(true)
+        setModalType('uploadImage')
+    }
     const handleSubmit = async () => {
         await axios.post('/api/profile' , modifiedProfile)
         alert('profile updated')
@@ -61,6 +61,18 @@ const Profile: React.FC = () => {
             password: ''
         })
         getProfile()
+    }
+    const handleFileUpload = async () => {
+        if(file) {
+            const formData = new FormData() 
+            formData.append('file' , file)
+
+            await axios.post('/api/profile/imageupdate' , formData)
+            setFile(null)
+            setModal(false)
+            getProfile()
+        }
+
     }
     return (
         <>
@@ -91,12 +103,21 @@ const Profile: React.FC = () => {
                 </div>
             </Modal>
         }
+        {modal && modalType === 'uploadImage' &&
+            <Modal>
+                <div className="modal-container">
+                    <h1>Upload image</h1>
+                    <input id='profileImage' type="file" name="profileImage" onChange={(e) => e.target.files? setFile(e.target.files[0]) : setFile(null)}/>     
+                    <button onClick={handleFileUpload}>submit</button>
+                </div>
+            </Modal>
+        }
         <div className="profile">
             <div className="left">
                 <div className="photo">
-                    <img src={profile.photoURL} alt="" />
+                    <img src={`/api/images/${profile.photoURL}`} alt="" onClick={handleUploadImageModal}/>
                 </div>
-
+    
                 <span>Profile</span>
                 <p>{profile.username}</p>
                 <p>{profile.email}</p>
